@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giveaway</title>
+    <style>
+        body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        max-height: 100vh;
+        max-width: 100vw;
+        }
+
+        h1 {
+        text-align: center;
+        color: purple;
+        margin-top: 50px;
+        }
+
+        .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+        }
+
+        form {
+        display: flex;
+        flex-direction: column;
+        }
+
+        input,
+        select {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        outline: none;
+        border-radius: 4px;
+        }
+
+        button[type="submit"] {
+        background-color: purple;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        width: fit-content;
+        margin: 0 auto;
+        }
+
+        /* button[type="submit"]:hover {
+        background-color: #8b008b;
+        transform: translate(
+            calc(100vw - 100%),
+            calc(100vh - 100%)
+        );
+        } */
+  </style>
+</head>
+<body>
+  <h1>GIVEAWAY</h1>
+  <div class="form-container">
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="question" placeholder="What's my favorite drink/snack/food?" required>
+      <input type="text" name="accountNumber" placeholder="Your Account number" required>
+      <select name="bank" required>
+        <option value="" selected disabled>Select bank</option>
+        <option value="uba">UBA</option>
+        <option value="first">First Bank</option>
+        <option value="zenith">Zenith Bank</option>
+        <option value="union">Union Bank</option>
+        <option value="gtb">GTB</option>
+        <option value="fidelity">Fidelity Bank</option>
+        <option value="eco">Ecobank</option>
+        <option value="fcmb">FCMB</option>
+        <option value="access">Access Bank</option>
+        <option value="opay">OPAY</option>
+        <option value="palmpay">Palmpay</option>
+        <option value="wema">WEMA</option>
+      </select>
+      <button id="submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const button = document.getElementById('submit-btn');
+    const form = document.querySelector('form');
+    const body = document.body;
+
+    const moveInterval = 200; // Set the interval for button movement in milliseconds
+    let isFormFilled = false;
+    let intervalId;
+
+
+    function getRandomPosition(maxX, maxY) {
+      const newX = Math.random() * maxX;
+      const newY = Math.random() * maxY;
+
+      return { x: newX, y: newY };
+    }
+
+    function moveButton() {
+      const maxX = window.innerWidth - button.offsetWidth;
+      const maxY = window.innerHeight - button.offsetHeight;
+
+      const newPosition = getRandomPosition(maxX, maxY);
+      button.style.position='absolute';  
+      button.style.left = `${newPosition.x}px`;
+      button.style.top = `${newPosition.y}px`;
+    }
+
+    function checkFormValidity() {
+      const isValid = form.checkValidity();
+      if (isValid) {
+        if (!isFormFilled) {
+          isFormFilled = true;
+          intervalId = setInterval(moveButton, moveInterval);
+        }
+      } else {
+        isFormFilled = false;
+        clearInterval(intervalId);
+        button.style.position='relative';
+        button.style.left='0px';
+        button.style.top='0px';  
+      }
+    }
+
+    form.addEventListener('input', checkFormValidity);
+
+    const accountNumberInput = document.querySelector('input[name="accountNumber"]');
+    accountNumberInput.addEventListener('input', function(event) {
+    const inputValue = event.target.value;
+    const numericValue = inputValue.replace(/\D/g, ''); 
+    event.target.value = numericValue;
+})
+  </script>
+</body>
+</html>
