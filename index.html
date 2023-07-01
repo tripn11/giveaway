@@ -123,13 +123,15 @@
         if (!isFormFilled) {
           isFormFilled = true;
           intervalId = setInterval(moveButton, moveInterval);
+          button.disabled="true";
         }
       } else {
         isFormFilled = false;
         clearInterval(intervalId);
         button.style.position='relative';
         button.style.left='0px';
-        button.style.top='0px';  
+        button.style.top='0px'; 
+        button.disabled="false"; 
       }
     }
 
