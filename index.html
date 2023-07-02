@@ -53,23 +53,31 @@
         transition: all 0.2s ease;
         width: fit-content;
         margin: 0 auto;
-        }
+      }
 
-        /* button[type="submit"]:hover {
-        background-color: #8b008b;
-        transform: translate(
-            calc(100vw - 100%),
-            calc(100vh - 100%)
-        );
-        } */
+      p {
+          transform: rotate(-45deg);
+          transform-origin: top left;
+          position: absolute;
+          top: 5rem;
+          left: 0.8rem;
+          translate:(-50%, -50%);
+      }
+
+
+      ion-icon {
+        color: #1DA1F2;
+        padding-right: 0.2rem;
+      }
   </style>
 </head>
 <body>
+  <p><ion-icon name="logo-twitter"></ion-icon>@noble_emy</p>
   <h1>GIVEAWAY</h1>
   <div class="form-container">
     <form>
       <input type="text" name="name" placeholder="Your Name" required>
-      <input type="text" name="question" placeholder="What's my favorite drink/snack/food?" required>
+      <input type="text" name="question" placeholder="What do you need the money for?" required>
       <input type="text" name="accountNumber" placeholder="Your Account number" required>
       <select name="bank" required>
         <option value="" selected disabled>Select bank</option>
@@ -90,12 +98,14 @@
     </form>
   </div>
 
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script>
     const button = document.getElementById('submit-btn');
     const form = document.querySelector('form');
     const body = document.body;
 
-    const moveInterval = 200; // Set the interval for button movement in milliseconds
+    const moveInterval = 200;
     let isFormFilled = false;
     let intervalId;
 
